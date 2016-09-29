@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Patchworks Connector Module for Magento 2.x
+ *
+ * Copyright: Patchworks Integration Limited
+ * Support: support@patchworks.co.uk
+ * Web: www.patchworks.co.uk
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+    <route url="/V1/patchworks/imagesearch" method="GET">
+        <service class="Patchworks\Connector\Api\ImageInterface" method="imageSearch"/>
+        <resources>
+            <resource ref="Patchworks_Connector::patchworks"/>
+        </resources>
+    </route>
+    <route url="/V1/patchworks/stocklevels" method="PUT">
+        <service class="Patchworks\Connector\Api\StocklevelInterface" method="setStockLevels"/>
+        <resources>
+            <resource ref="Patchworks_Connector::patchworks"/>
+        </resources>
+    </route>
+    <route url="/V1/patchworks/reindex" method="GET">
+        <service class="Patchworks\Connector\Api\ReindexInterface" method="reindexData"/>
+        <resources>
+            <resource ref="Patchworks_Connector::patchworks"/>
+        </resources>
+    </route>
+</routes>

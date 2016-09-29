@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Patchworks Connector Module for Magento 2.x
+ *
+ * Copyright: Patchworks Integration Limited
+ * Support: support@patchworks.co.uk
+ * Web: www.patchworks.co.uk
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Patchworks\Connector\Api\ImageInterface" type="Patchworks\Connector\Model\Images"/>
+    <preference for="Patchworks\Connector\Api\ReindexInterface" type="Patchworks\Connector\Model\Reindex"/>
+    <preference for="Patchworks\Connector\Api\StocklevelInterface" type="Patchworks\Connector\Model\Stocklevel"/>
+</config>

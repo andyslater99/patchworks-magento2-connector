@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Patchworks Connector Module for Magento 2.x
+ *
+ * Copyright: Patchworks Integration Limited
+ * Support: support@patchworks.co.uk
+ * Web: www.patchworks.co.uk
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Patchworks_Connector::patchworks" title="Patchworks" translate="Patchworks"
+                          sortOrder="110"/>
+            </resource>
+        </resources>
+    </acl>
+</config>

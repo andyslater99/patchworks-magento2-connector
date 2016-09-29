@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Patchworks Connector Module for Magento 2.x
+ *
+ * Copyright: Patchworks Integration Limited
+ * Support: support@patchworks.co.uk
+ * Web: www.patchworks.co.uk
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="patchworks" frontName="patchworks">
+            <module name="Patchworks_Connector"/>
+        </route>
+    </router>
+</config>
