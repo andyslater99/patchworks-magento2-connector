@@ -1,5 +1,5 @@
 {
-    "name": "patchworks/connector",
+    "name": "patchworks/magento2-connector",
     "autoload": {
         "files": [
             "registration.php"
