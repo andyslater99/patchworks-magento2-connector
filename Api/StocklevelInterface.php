@@ -16,4 +16,10 @@ interface StocklevelInterface
      * @return mixed
      */
     public function setStockLevels();
+
+    /**
+     * Get the stock levels on mass.
+     * @return mixed
+     */
+    public function getStockLevels();
 }

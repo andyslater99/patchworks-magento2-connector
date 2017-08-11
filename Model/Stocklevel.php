@@ -50,6 +50,33 @@ class Stocklevel implements StocklevelInterface
      * Loop through all of the stock levels and inject in to the database.
      * @return array
      */
+    public function getStockLevels()
+    {
+        $this->setupDbConnection();
+        $table = $this->db->getTableName('cataloginventory_stock_item');
+        $p_table = $this->db->getTableName('catalog_product_entity');
+        $fields = [
+            $table . '.product_id',
+            $table . '.qty',
+            $table . '.backorders',
+            $table . '.is_in_stock',
+            $table . '.low_stock_date',
+            $table . '.manage_stock',
+            $p_table . '.sku'
+        ];
+        $query = 'SELECT ' . implode(', ', $fields) . ' FROM `' . $table . '` LEFT JOIN `' . $p_table . '` ON ' . $table . '.product_id = ' . $p_table . '.entity_id LIMIT 10';
+        try {
+            $stocklevels = $this->db->fetchAll($query);
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+        return $stocklevels;
+    }
+
+    /**
+     * Loop through all of the stock levels and inject in to the database.
+     * @return array
+     */
     public function setStockLevels()
     {
         $data = $this->getInputData();

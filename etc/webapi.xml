@@ -22,6 +22,12 @@
             <resource ref="Patchworks_Connector::patchworks"/>
         </resources>
     </route>
+    <route url="/V1/patchworks/stocklevels" method="GET">
+        <service class="Patchworks\Connector\Api\StocklevelInterface" method="getStockLevels"/>
+        <resources>
+            <resource ref="Patchworks_Connector::patchworks"/>
+        </resources>
+    </route>
     <route url="/V1/patchworks/reindex" method="GET">
         <service class="Patchworks\Connector\Api\ReindexInterface" method="reindexData"/>
         <resources>
