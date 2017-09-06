@@ -62,9 +62,10 @@ class Stocklevel implements StocklevelInterface
             $table . '.is_in_stock',
             $table . '.low_stock_date',
             $table . '.manage_stock',
-            $p_table . '.sku'
+            $p_table . '.sku',
+            $p_table . '.type_id'
         ];
-        $query = 'SELECT ' . implode(', ', $fields) . ' FROM `' . $table . '` LEFT JOIN `' . $p_table . '` ON ' . $table . '.product_id = ' . $p_table . '.entity_id LIMIT 10';
+        $query = 'SELECT ' . implode(', ', $fields) . ' FROM `' . $table . '` LEFT JOIN `' . $p_table . '` ON ' . $table . '.product_id = ' . $p_table . '.entity_id';
         try {
             $stocklevels = $this->db->fetchAll($query);
         } catch (\Exception $e) {
