@@ -9,42 +9,11 @@ namespace Patchworks\Connector\Model;
  * Web: www.patchworks.co.uk
  */
 
-use Magento\Backend\App\Action\Context;
 use Patchworks\Connector\Api\StocklevelInterface;
 
-class Stocklevel implements StocklevelInterface
+class Stocklevel extends Base implements StocklevelInterface
 {
-
     protected $debug = [];
-    protected $db = false;
-    protected $_resource;
-
-    public function __construct(Context $context, \Magento\Framework\App\ResourceConnection $resource)
-    {
-        $this->_resource = $resource;
-    }
-
-    /**
-     * Get the database connection.
-     * @return object
-     */
-    protected function setupDbConnection()
-    {
-        $this->db = $this->_resource->getConnection(\Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION);
-    }
-
-    /**
-     * Get the product entity id from the database based on the SKU.
-     * @param string $sku
-     * @param string $type_id
-     * @return int $entity_id
-     */
-    protected function getProductEntityId($sku, $type_id = 'simple')
-    {
-        $entity_id = $this->db->fetchOne($this->db->select()->from('catalog_product_entity',
-            'entity_id')->where('sku = ?', $sku)->limit(1));
-        return $entity_id;
-    }
 
     /**
      * Loop through all of the stock levels and inject in to the database.
@@ -55,6 +24,8 @@ class Stocklevel implements StocklevelInterface
         $this->setupDbConnection();
         $table = $this->db->getTableName('cataloginventory_stock_item');
         $p_table = $this->db->getTableName('catalog_product_entity');
+        $pi_table = $this->db->getTableName('catalog_product_entity_int');
+        $status_att_id = $this->getAttributeId('status');
         $fields = [
             $table . '.product_id',
             $table . '.qty',
@@ -65,7 +36,12 @@ class Stocklevel implements StocklevelInterface
             $p_table . '.sku',
             $p_table . '.type_id'
         ];
-        $query = 'SELECT ' . implode(', ', $fields) . ' FROM `' . $table . '` LEFT JOIN `' . $p_table . '` ON ' . $table . '.product_id = ' . $p_table . '.entity_id';
+        $query = 'SELECT ' . implode(', ', $fields) . ' FROM `' . $table
+            . '` LEFT JOIN `' . $p_table . '` ON ' . $table . '.product_id = ' . $p_table . '.entity_id '
+            . 'LEFT JOIN `' . $pi_table . '` ON ' . $table . '.product_id = ' . $pi_table . '.entity_id '
+            . 'WHERE ' . $table . '.is_in_stock = 1 AND ' . $p_table . '.type_id = "simple" '
+            . 'AND ' . $pi_table . '.attribute_id = ' . $status_att_id . ' AND ' . $pi_table . '.value = 1 '
+            . 'AND ' . $pi_table . '.store_id = 0 GROUP BY ' . $p_table . '.entity_id';
         try {
             $stocklevels = $this->db->fetchAll($query);
         } catch (\Exception $e) {
