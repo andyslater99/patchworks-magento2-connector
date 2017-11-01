@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="callback_customer_create" instance="Patchworks\Connector\Observer\CustomerCreate" />
+    </event>
+    <event name="customer_account_edited">
+    <!--<event name="customer_save_before">-->
+        <observer name="callback_customer_update" instance="Patchworks\Connector\Observer\CustomerUpdate" />
+    </event>
+    <event name="customer_delete_after">
+        <observer name="callback_customer_delete" instance="Patchworks\Connector\Observer\CustomerDelete" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="callback_order_create" instance="Patchworks\Connector\Observer\OrderCreate" />
+    </event>
+    <event name="sales_order_invoice_register">
+        <observer name="callback_order_invoice_create" instance="Patchworks\Connector\Observer\OrderInvoiceCreate" />
+    </event>
+    <event name="sales_order_shipment_save_after">
+        <!--TODO: custom event fired by plugin-->
+        <observer name="callback_order_shipment_create" instance="Patchworks\Connector\Observer\OrderShipmentCreate" />
+    </event>
+    <event name="sales_order_payment_refund">
+        <observer name="callback_order_refund_create" instance="Patchworks\Connector\Observer\OrderRefundCreate" />
+    </event>
+</config>

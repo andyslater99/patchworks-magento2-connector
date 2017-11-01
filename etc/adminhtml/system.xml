@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="patchworks_connector" translate="label" sortOrder="411">
+            <label>Patchworks Connector</label>
+        </tab>
+        <section id="patchworks_connector" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Callbacks</label>
+            <tab>patchworks_connector</tab>
+            <resource>Patchworks_Connector::connector</resource>
+            <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Callback Urls</label>
+                <field id="logger" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Logger</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Logger for Debugging purpose</comment>
+                </field>
+                <field id="customer_create" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer/Create</label>
+                    <comment>Specify url to send data to when customer registered</comment>
+                </field>
+                <field id="customer_update" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer/Update</label>
+                    <comment>Specify url to send data to when customer update his/her account</comment>
+                </field>
+                <field id="customer_delete" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer/Delete</label>
+                    <comment>Specify url to send data to when a customer is deleted</comment>
+                </field>
+                <field id="order_create" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order/Create</label>
+                    <comment>Specify url to send data to when a new Order created</comment>
+                </field>
+                <field id="order_invoice_create" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order/Invoice/Create</label>
+                    <comment>Specify url to send data to when a new Invoice created</comment>
+                </field>
+                <field id="order_shipment_create" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order/Shipment/Create</label>
+                    <comment>Specify url to send data to when a new Shipment created</comment>
+                </field>
+                <field id="order_refund_create" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order/Refund/Create</label>
+                    <comment>Specify url to send data to when a new Refund created</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
