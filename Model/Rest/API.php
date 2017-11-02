@@ -49,7 +49,7 @@ class API
             $response = $this->_curl->getBody();
             $this->logger(self::LOG_AFTER, $url, array('body' => $response));
         }
-        catch (Exception $e) {
+        catch (\Exception $e) {
             $this->logger(self::LOG_ERROR, $url, array('error_msg' => $e->getMessage()));
         }
     }

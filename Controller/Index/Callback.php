@@ -17,12 +17,19 @@ class Callback extends \Magento\Framework\App\Action\Action
     protected $resultPageFactory;
 
     /**
+     * @var \Magento\Framework\Controller\Result\JsonFactory
+     */
+    protected $resultJsonFactory;
+
+    /**
      * @param \Magento\Framework\App\Action\Context $context
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
+        $this->resultJsonFactory = $resultJsonFactory;
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
@@ -35,6 +42,7 @@ class Callback extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $postData = $this->getRequest()->getPost();
-        echo serialize($postData); die;
+        $resultJson = $this->resultJsonFactory->create();
+        return $resultJson->setData($postData);
     }
 }

@@ -17,13 +17,21 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $resultPageFactory;
 
     /**
+     * @var \Magento\Framework\Controller\Result\JsonFactory
+     */
+    protected $resultJsonFactory;
+
+    /**
      * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
+        $this->resultJsonFactory = $resultJsonFactory;
         parent::__construct($context);
     }
 
@@ -34,6 +42,10 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        exit('Patchworks Connector Installed');
+        $response = [
+            'message' => __('Patchworks Connector Installed')
+        ];
+        $resultJson = $this->resultJsonFactory->create();
+        return $resultJson->setData($response);
     }
 }
